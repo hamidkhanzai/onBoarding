@@ -15,10 +15,6 @@ type State = {
   age: number,
 }
 
-const mapStateToProps = state => ({
-  age: state.onBoarding.age,
-});
-
 const mapDispatchToProps = {
   setAge,
 };
@@ -48,11 +44,9 @@ export class Age extends Component<Props, State> {
 
   onTextChanged = (age) => {
     this.setState({ age: parseInt(age) });
-    console.log(age);
   }
 
   render() {
-    console.log(this.props.age);
     return (
       <View style={styles.container}>
         <View style={styles.topLine}>
@@ -77,6 +71,7 @@ export class Age extends Component<Props, State> {
             onPress={() => this.onContinue()}
             disabled={!(this.state.age > 17 && this.state.age <= 130)}
             style={styles.buttonMargin}
+            title={"Continue"}
           >
           </NativeButton>
       </KeyboardAvoidingView>
@@ -85,7 +80,7 @@ export class Age extends Component<Props, State> {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Age);
+export default connect(null, mapDispatchToProps)(Age);
 
 const styles = StyleSheet.create({
   container: {

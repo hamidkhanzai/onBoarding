@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 
 import { StyleSheet, FlatList, Dimensions, View, Image,
   TextInput, Text, KeyboardAvoidingView } from 'react-native';
+import { connect } from 'react-redux';
 import { colors, fonts, images } from '../../../common/';
 import NativeButton from '../../../common/NativeButton';
 import RoundedButton from '../../../common/RoundedButton';
 import I18n from '../../../i18n';
+import { setHeight } from '../../../actions/onboarding';
 
 type Props = {
   navigator: Navigator,
@@ -16,7 +18,11 @@ type State = {
   unit: string,
 }
 
-export default class Height extends Component<Props, State> {
+const mapDispatchToProps = {
+  setHeight,
+};
+
+export class Height extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
@@ -32,7 +38,14 @@ export default class Height extends Component<Props, State> {
   };
 
   onContinue = () => {
-    console.log(this.props.navigator);
+    this.props.setHeight(this.state);
+    this.props.navigator.push({
+      screen: 'Confirm',
+      navigatorStyle: {
+        navBarBackgroundColor: colors.light,
+        topBarElevationShadowEnabled: false,
+      }
+    });
   }
 
   onUnitChange = (unit: string) => {
@@ -108,6 +121,7 @@ export default class Height extends Component<Props, State> {
             onPress={() => this.onContinue()}
             disabled={!(this.state.height >= 125 && this.state.height <= 301)}
             style={styles.buttonMargin}
+            title={"Continue"}
           >
           </NativeButton>
       </KeyboardAvoidingView>
@@ -115,6 +129,8 @@ export default class Height extends Component<Props, State> {
     );
   }
 }
+
+export default connect(null, mapDispatchToProps)(Height);
 
 const styles = StyleSheet.create({
   container: {
@@ -177,6 +193,4 @@ const styles = StyleSheet.create({
   buttonMargin: {
     marginBottom: 100,
   },
-
-
 });

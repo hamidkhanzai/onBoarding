@@ -29,10 +29,12 @@ function onboardingReducer(
     };
 
   case 'SET_HEIGHT':
-    return {
+    const goal= {
       ...state,
       height: action.height,
     };
+      console.log(goal);
+      return goal;
 
   default:
     return state;

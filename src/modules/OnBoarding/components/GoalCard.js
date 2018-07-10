@@ -12,6 +12,7 @@ type Props = {
   navigator: Navigator,
   goal: Object,
   index: number,
+  setGoal: (goal: string) => void,
 };
 
 type State = {
@@ -39,7 +40,8 @@ export class GoalCard extends PureComponent<Props, State> {
     );
   }
 
-  onSelectedTopic = () => {
+  onSelectedGoal = () => {
+    this.props.setGoal(this.props.goal.title);
     this.props.navigator.push({
       screen: "Age",
       passProps: {
@@ -50,7 +52,7 @@ export class GoalCard extends PureComponent<Props, State> {
   render() {
     return (
       <TouchableOpacity
-        onPress={this.onSelectedTopic}
+        onPress={this.onSelectedGoal}
       >
         <View style={styles.elevationWrapper}>
           <View style={styles.container}>

@@ -8,6 +8,7 @@ type Props = {
   style: Array<any> | Object;
   children: Array<any> | Object;
   onPress: () => void;
+  title: string,
   borderless?: boolean;
   rippleColor?: string;
   disabled: boolean;
@@ -19,6 +20,7 @@ export default function NativeButton({
   onPress,
   borderless,
   rippleColor,
+  title,
   style,
   disabled,
   disabledOpacity,
@@ -31,7 +33,7 @@ export default function NativeButton({
       onPress={onPress}
       underlayColor='#fff'>
         <Text style={[{ opacity: disabled ? disabledOpacity : 1 },
-          styles.submitText]}>Continue</Text>
+          styles.submitText]}>{title}</Text>
     </TouchableHighlight>
   );
 }
@@ -41,6 +43,7 @@ NativeButton.defaultProps = {
   rippleColor: colors.rippleDefault,
   disabled: false,
   disabledOpacity: 1,
+  title: 'Continue',
 };
 
 const styles = StyleSheet.create({
@@ -48,6 +51,7 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 25,
     borderWidth: 1,
+    borderColor: colors.darkBlack,
     borderColor: '#fff',
     width: '40%',
   },

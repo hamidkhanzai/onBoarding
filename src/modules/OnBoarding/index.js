@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { colors, fonts, images } from '../../common/';
 import { GoalCard } from './components/GoalCard';
 import I18n from '../../i18n';
+import { setGoal } from '../../actions/onboarding';
 
 type Props = {
   navigator: Navigator,
@@ -15,6 +16,9 @@ const mapStateToProps = state => ({
   goals: state.onBoarding.goals,
 });
 
+const mapDispatchToProps = {
+  setGoal,
+};
 
 const { width, height } = Dimensions.get("window");
 
@@ -28,12 +32,12 @@ export class OnBoarding extends Component<Props> {
     <GoalCard
       goal={item}
       navigator={this.props.navigator}
+      setGoal={this.props.setGoal}
       index={index}
     />
   )
 
   render() {
-    alert('this is alert');
     return (
       <View style={styles.container}>
         <View style={styles.backgroundImageLeft}>
@@ -63,7 +67,7 @@ export class OnBoarding extends Component<Props> {
   }
 }
 
-export default connect(mapStateToProps, null)(OnBoarding);
+export default connect(mapStateToProps, mapDispatchToProps)(OnBoarding);
 
 const styles = StyleSheet.create({
   container: {
