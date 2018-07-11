@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 
-import { StyleSheet, FlatList, Dimensions, View, Image,
+import { StyleSheet, FlatList, Dimensions, View, Image, Animated,
   Text } from 'react-native';
 import { connect } from 'react-redux';
+import * as Animatable from 'react-native-animatable';
 import { colors, fonts, images } from '../../common/';
 import { GoalCard } from './components/GoalCard';
 import I18n from '../../i18n';
@@ -28,6 +29,25 @@ export class OnBoarding extends Component<Props> {
     statusBarTextColorScheme: 'dark',
   };
 
+  componentWillMount() {
+    this.animatedValue1 = new Animated.Value(height / 3);
+    this.animatedValue2 = new Animated.Value(2);
+  }
+
+  componentDidMount() {
+    Animated.sequence([
+      Animated.timing(this.animatedValue1, {
+        toValue: 0,
+        duration: 1000
+      }),
+
+      Animated.timing(this.animatedValue2, {
+        toValue: 1,
+        duration: 0,
+      })
+    ]).start();
+  }
+
   renderItem = ({ item, index }: { item: Object, index: number }) => (
     <GoalCard
       goal={item}
@@ -38,30 +58,41 @@ export class OnBoarding extends Component<Props> {
   )
 
   render() {
+    const animatedStyle = {
+      transform: [
+        { translateY: this.animatedValue1},
+        { scale: this.animatedValue2}
+      ]
+    }
     return (
       <View style={styles.container}>
         <View style={styles.backgroundImageLeft}>
-          <Image source={images.imgBeans} style={styles.imgBeans} />
+          <Animatable.Image animation = "slideInLeft" duration={2000} delay={0}
+            source={images.imgBeans} style={styles.imgBeans} />
         </View>
         <View style={styles.backgroundImageRight}>
-          <Image source={images.imgMat} style={styles.imgMat} />
-          <Image source={images.imgDumbbell} style={styles.imgDumbbell} />
+          <Animatable.Image animation = "slideInRight" duration={2000} delay={0}
+            source={images.imgMat} style={styles.imgMat} />
+          <Animatable.Image animation = "slideInRight" duration={2000} delay={0}
+            source={images.imgDumbbell} style={styles.imgDumbbell} />
         </View>
 
-        <View style={styles.titleContainer}>
+        <Animated.View style={[animatedStyle, styles.titleContainer]}>
           <Image style={styles.image} source={images.icon8Logo} />
-        </View>
-        <View style={styles.titleContainer}>
-          <Text style={styles.welcome}> {I18n.t('welcome')} </Text>
-          <Text style={styles.title}> {I18n.t("goal_question")} </Text>
-        </View>
-        <View style={styles.List}>
-          <FlatList
-            data={this.props.goals}
-            renderItem={this.renderItem}
-            keyExtractor={_d => String(Math.random() * 10000)}
-          />
-        </View>
+        </Animated.View>
+        <Animatable.View  animation = "fadeInUp" duration={2000} delay={0} >
+          <View style={styles.titleContainer}>
+            <Text style={styles.welcome}> {I18n.t('welcome')} </Text>
+            <Text style={styles.title}> {I18n.t("goal_question")} </Text>
+          </View>
+          <View style={styles.List}>
+            <FlatList
+              data={this.props.goals}
+              renderItem={this.renderItem}
+              keyExtractor={_d => String(Math.random() * 10000)}
+            />
+          </View>
+        </Animatable.View>
       </View>
     );
   }

@@ -9,19 +9,15 @@ type Props = {
   children: Array<any> | Object;
   active: boolean,
   onPress: (unit: string) => void;
-  borderless?: boolean;
-  rippleColor?: string;
   disabled: boolean;
   disabledOpacity?: number;
 };
 
 
 export default class RoundedButton extends PureComponent<Props> {
-
   setUnit = (unit: string) => {
     this.props.onPress(unit);
   }
-
   render() {
     const { onPress, active, disabled } = this.props;
     return (
@@ -52,10 +48,9 @@ export default class RoundedButton extends PureComponent<Props> {
 }
 
 RoundedButton.defaultProps = {
-  borderless: false,
-  rippleColor: colors.rippleDefault,
   disabled: false,
   disabledOpacity: 1,
+  active: false,
 };
 
 const styles = StyleSheet.create({

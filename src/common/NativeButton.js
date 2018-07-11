@@ -10,7 +10,6 @@ type Props = {
   onPress: () => void;
   title: string,
   borderless?: boolean;
-  rippleColor?: string;
   disabled: boolean;
   disabledOpacity?: number;
 };
@@ -19,7 +18,6 @@ type Props = {
 export default function NativeButton({
   onPress,
   borderless,
-  rippleColor,
   title,
   style,
   disabled,
@@ -40,7 +38,6 @@ export default function NativeButton({
 
 NativeButton.defaultProps = {
   borderless: false,
-  rippleColor: colors.rippleDefault,
   disabled: false,
   disabledOpacity: 1,
   title: 'Continue',
