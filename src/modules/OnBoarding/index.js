@@ -38,7 +38,7 @@ export class OnBoarding extends Component<Props> {
     Animated.sequence([
       Animated.timing(this.animatedValue1, {
         toValue: 0,
-        duration: 1000
+        duration: 800
       }),
 
       Animated.timing(this.animatedValue2, {
@@ -67,20 +67,20 @@ export class OnBoarding extends Component<Props> {
     return (
       <View style={styles.container}>
         <View style={styles.backgroundImageLeft}>
-          <Animatable.Image animation = "slideInLeft" duration={2000} delay={0}
+          <Animatable.Image animation = "fadeInLeft" duration={1000} delay={1000}
             source={images.imgBeans} style={styles.imgBeans} />
         </View>
         <View style={styles.backgroundImageRight}>
-          <Animatable.Image animation = "slideInRight" duration={2000} delay={0}
+          <Animatable.Image animation = "fadeInRight" duration={1000} delay={1000}
             source={images.imgMat} style={styles.imgMat} />
-          <Animatable.Image animation = "slideInRight" duration={2000} delay={0}
+          <Animatable.Image animation = "fadeInRight" duration={1000} delay={1000}
             source={images.imgDumbbell} style={styles.imgDumbbell} />
         </View>
 
         <Animated.View style={[animatedStyle, styles.titleContainer]}>
           <Image style={styles.image} source={images.icon8Logo} />
         </Animated.View>
-        <Animatable.View  animation = "fadeInUp" duration={2000} delay={0} >
+        <Animatable.View  animation = "fadeInUp" duration={1000} delay={1000} >
           <View style={styles.titleContainer}>
             <Text style={styles.welcome}> {I18n.t('welcome')} </Text>
             <Text style={styles.title}> {I18n.t("goal_question")} </Text>

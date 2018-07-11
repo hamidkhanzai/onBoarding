@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
-import {
-  Animated, TouchableOpacity, StyleSheet, Text, View,
+import { Animated, TouchableOpacity, StyleSheet, Text, View,
   Image, Dimensions } from 'react-native';
 import I18n from '../../../i18n';
 
@@ -13,10 +12,6 @@ type Props = {
   goal: Object,
   index: number,
   setGoal: (goal: string) => void,
-};
-
-type State = {
-  opacityAnim: Animated.Value;
 };
 
 export class GoalCard extends PureComponent<Props, State> {
@@ -44,8 +39,6 @@ export class GoalCard extends PureComponent<Props, State> {
     this.props.setGoal(this.props.goal.title);
     this.props.navigator.push({
       screen: "Age",
-      passProps: {
-      },
     });
   }
 
